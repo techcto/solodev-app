@@ -1,0 +1,12 @@
+{% extends 'theme/app.html.twig' %}
+
+{% block layout %}
+  {% embed 'templates/layout/3-9.html.twig' %}
+    {% block brand %}
+      {% include 'templates/brand.html.twig' %}
+    {% endblock %}
+    {% block content %}
+      {% include 'app/dashboard.html.twig' %}
+    {% endblock %}
+  {% endembed %}
+{% endblock %}

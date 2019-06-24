@@ -1,0 +1,16 @@
+FROM 'techcto/httpd:latest'
+
+#Install App
+RUN mkdir -p /var/www/app
+COPY www /var/www/app/www
+
+RUN cd /var/www/app/www && rm -Rf node_modules __/app* && npm install && npm run compile
+
+# App Config
+RUN echo "Include conf/extra/app.conf" >> /usr/local/apache2/conf/httpd.conf && mkdir -p /var/log/apache2 && adduser daemon www-data
+COPY ./docker/web/app.conf /usr/local/apache2/conf/extra/app.conf
+
+#Entrypoint
+COPY ./docker/web/docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod a+rx /docker-entrypoint.sh
+ENTRYPOINT ["sh", "/docker-entrypoint.sh"]

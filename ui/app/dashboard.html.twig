@@ -1,0 +1,76 @@
+<div class="main-wrapper">
+  {% if custom_dashboard == 1 %}
+    {{ dashboard | raw }}
+  {% else %}
+  <div class="row">
+  
+    {# Hamburger menu on small screens #}
+    <div class="col-2 col-sm-1 d-lg-none d-block">
+      <div class="sidenav-open pointer" aria-label="Menu Toggle" title="Menu">
+        <i class="fas fa-bars fa-2x text-boulder-gray"></i>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-lg-6 pr-lg-5">
+      <h2 class="h5">Websites</h2>
+      {{ table(websitesTable) }}
+      <h2 class="h5 mt-4">Recents</h2>
+      {{ table(recentsTable) }}
+    </div>
+
+    {% if tour_entries %}
+    <div class="col-lg-6 mt-lg-0 mt-4">
+      <h2 class="h5">Tours</h2>
+      {% for entries in tour_entries %}
+        {% for entry in entries %}
+          <div class="card py-4 border-left-0 border-right-0 border-bottom-0">            
+            <div class="row no-gutters align-items-center">
+              <div class="col-lg-2">
+                {% if entry.featured_image %}
+                  <a href="/tours/{{entry.calendar_entry_id}}"><img src="https://dev.solodev.com/core/fileparse.php/id/{{entry.featured_image}}" class="img-fluid" alt="{{entry.name}}"></a>
+                {% else %}
+                  <a href="/tours/{{entry.calendar_entry_id}}"><img src="https://dev.solodev.com/_/images/blog_default.jpg" class="img-fluid" alt="{{entry.name}}"></a>
+                {% endif %}
+                
+              </div>
+              <div class="col-lg-10">
+                <div class="card-block pl-0 px-lg-4 mt-lg-0 mt-3">
+                  <h3 class="h4"><a href="/tours/{{entry.calendar_entry_id}}" class="text-vulcan">{{entry.name}}</a></h4>
+                  <p class="card-text">{{entry.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="col-lg-6 mt-lg-0 mt-4">
+      <h2 class="h5">Latest Blog Posts</h2>
+      {% for entries in blog_entries %}
+        {% for entry in entries %}
+          <div class="card py-4 border-left-0 border-right-0 border-bottom-0">            
+            <div class="row no-gutters align-items-center">
+              <div class="col-lg-2">
+                <a href="https://dev.solodev.com{{entry.url}}" target="_blank"><img src="https://dev.solodev.com{{entry.listing_image_url}}" class="img-fluid" alt="{{entry.name}}"></a>
+              </div>
+              <div class="col-lg-9">
+                <div class="card-block pl-0 px-lg-4 mt-lg-0 mt-3">
+                  <h3 class="h4"><a href="https://dev.solodev.com{{entry.url}}" target="_blank" class="text-vulcan">{{entry.name}}</a></h4>
+                  <p class="card-text">{{entry.post_intro}}</p>
+                </div>
+              </div>
+              <div class="col-lg-1">
+                <a href="https://dev.solodev.com{{entry.url}}" title="View Blog Post" target="_blank" class="text-color1"><i class="fas fa-external-link-alt fa-2x"></i></a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+  </div>
+  {% endif %}
+</div>

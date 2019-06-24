@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html class="fixed top-level sidebar-light sidebar-left-sm">
+  <head>
+    <!-- Basic -->
+    <meta charset="UTF-8">
+    <!-- Mobile Metas -->
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <title>{{ organization }}</title>
+    <!-- Theme CSS -->
+    <link href="/__/app.min.css" rel="stylesheet">
+
+    <!-- Theme JS -->
+    <script src="/__/app.min.js"></script>
+    <script>var timestamp = '{{ timestamp }}';</script>
+    <script>var nonce = '{{ nonce }}';</script>
+
+  </head>
+  <body class="{% block theme %}theme{% endblock %}">
+    {% block layout %}{% endblock %}
+  </body>
+</html>

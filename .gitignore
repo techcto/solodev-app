@@ -1,0 +1,7 @@
+.env
+/vendor/
+/tmp/
+/www/node_modules/
+www/__/main/app.*
+/www/log/app.log
+/www/applog/app.log

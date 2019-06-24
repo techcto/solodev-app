@@ -1,0 +1,22 @@
+<div class="wrapper">
+  {% if not isTab %}
+  <aside class="sidebar-left movable-div position-fixed bottom-0 left-0 animated">
+    <div class="sidenav-close rounded-circle text-center position-absolute pointer">
+      <i class="fas fa-chevron-left fa-xs"></i>
+    </div>
+    {% block brand %}{% endblock %}
+    <div class="nano">
+      <nav class="nano-content">
+        {% block sidebar %}{% endblock %}
+        {% block profilePopover %}{% endblock %}
+      </nav>
+    </div>
+  </aside>
+  <div id="mainArea" class="content">
+  {% else %}
+  <div id="mainArea" class="portal">
+  {% endif %}
+    {% block breadcrumb %}{% endblock %}
+    {% block content %}{% endblock %}
+  </div>
+</div>

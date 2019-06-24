@@ -1,0 +1,48 @@
+
+# Build file for App 
+
+version: '2'
+
+services: 
+
+  app:
+    build:
+      context: .
+    tty: true
+    environment:
+      APP_ENV: '${APP_ENV}'
+    volumes:
+      - ./config:/var/www/app/config
+      - ./src:/var/www/app/src
+      - ./tests:/var/www/app/tests
+      - ./ui:/var/www/app/ui
+      - ./www:/var/www/app/www
+      - ./composer.json:/var/www/app/composer.json
+      - ./composer.lock:/var/www/app/composer.lock
+    links:
+      - redis
+    ports:
+      - 9000
+    restart: always
+
+  web: 
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    environment:
+      APP_ENV: '${APP_ENV}'
+    volumes:      
+      - ./www/__:/var/www/app/www/__
+    ports:
+      - '${HTTP_PORT}:80'
+      - '${HTTPS_PORT}:443'
+    links:
+      - app
+    depends_on:
+      - app
+    restart: always
+
+  redis:
+    image: redis:alpine
+    ports:
+        - '${REDIS_PORT}:6379'
