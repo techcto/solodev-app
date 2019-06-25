@@ -1,0 +1,126 @@
+// Type settings
+$font-family: "Inter", "proxima-nova", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+$fa-font: 'Font Awesome 5 Free';
+$fa-font-brand: 'Font Awesome 5 Brands';
+$font-size: .9rem;
+
+/* =======================
+  # Color pallette
+======================= */
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "color1": #d60e96,
+  "color2": #3d5d6f,
+  "black": $black,
+  "white": $white,
+), $theme-colors);
+
+/* ==========================
+  # Colors
+========================== */
+@each $color, $value in $theme-colors {
+
+  // Generate `.bg-*` color utilities
+  @include bg-variant('.bg-#{$color}', $value);
+
+  // Generate `.text-*` color utilities
+  @include text-emphasis-variant(".text-#{$color}", $value);
+
+  // Generate `.btn-*` color utilities
+  .btn-#{$color} {
+    @include button-variant($value, $value);
+  }
+
+  // Generate `.btn-*` color utilities
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value);
+  }
+  
+  // Generate `.border-*` color utilities
+  .border-#{$color} {
+    border-color: $value !important;
+  }
+  
+  // Generate `.bg-hover*` color utilities
+  .bg-hover-#{$color} {
+    &:hover {
+      background-color: #{$value};
+    }
+  }
+}
+
+/* ================================
+# Bootstrap Height and Width Classes
+================================ */
+// This variable affects the `.h-*` and `.w-*` classes.
+// Iterate for what you need.
+$sizes: () !default;
+@for $i from 1 through 1000 {
+  @if $i <= 100 {
+    @if $i%5 == 0 {
+      $holdingArrayPercent: (
+      // Escape the Percentage Sign
+      '#{$i}': #{$i}#{'%'}
+      );
+      $sizes: map-merge($sizes, $holdingArrayPercent);
+      $holdingArrayPixels: (
+      '#{$i}p': #{$i}px
+      );
+      $sizes: map-merge($sizes, $holdingArrayPixels);
+    }
+  }
+  @if $i%10 == 0 {
+    $holdingArrayPixels: (
+    '#{$i}p': #{$i}px
+    );
+    $sizes: map-merge($sizes, $holdingArrayPixels); 
+  }
+}
+
+// We make our own for MD Screen Size Width/Heights
+$sizesMd: () !default;
+$sizesMd: map-merge($sizes, $sizesMd);
+
+@media (min-width: 768px) {
+  @each $prop, $abbrev in (width: w-md, height: h-md) {
+    @each $size, $length in $sizesMd {
+        html .#{$abbrev}-#{$size} { #{$prop}: $length !important; 
+      }
+    }
+  }
+}
+
+// We make our own for LG Screen Size Width/Heights
+$sizesLg: () !default;
+$sizesLg: map-merge($sizes, $sizesLg);
+
+@media (min-width: 991px) {
+  @each $prop, $abbrev in (width: w-lg, height: h-lg) {
+    @each $size, $length in $sizesLg {
+      html .#{$abbrev}-#{$size} { #{$prop}: $length !important; }
+    }
+  }
+}
+
+// We make our own for XL Screen Size Width/Heights
+$sizesXL: () !default;
+$sizesXL: map-merge($sizes, $sizesLg);
+
+@media (min-width: 1200px) {
+  @each $prop, $abbrev in (width: w-xl, height: h-xl) {
+    @each $size, $length in $sizesLg {
+      html .#{$abbrev}-#{$size} { #{$prop}: $length !important; }
+    }
+  }
+}
+
+// Loop through each breakpoint and provide classes for the sizes within the sizes map from previous loop
+@each $breakpoint-key, $breakpoint in $grid-breakpoints {
+  @media (min-width: #{$breakpoint}) {
+    @each $prop, $abbrev in (width: w-#{$breakpoint-key}, height: h-#{$breakpoint-key}) {
+      @each $size, $length in $sizes {
+        html .#{$abbrev}-#{$size} { #{$prop}: #{$length} !important;}
+      }
+    }
+  }
+}

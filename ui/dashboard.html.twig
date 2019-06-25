@@ -1,12 +1,15 @@
 {% extends 'theme/app.html.twig' %}
 
 {% block layout %}
-  {% embed 'templates/layout/3-9.html.twig' %}
+  {% embed 'templates/layout/full.html.twig' %}
     {% block brand %}
-      {% include 'templates/brand.html.twig' %}
+      {% include 'templates/header.html.twig' %}
     {% endblock %}
     {% block content %}
       {% include 'app/dashboard.html.twig' %}
+    {% endblock %}
+    {% block footer %}
+      {% include 'templates/footer.html.twig' %}
     {% endblock %}
   {% endembed %}
 {% endblock %}
