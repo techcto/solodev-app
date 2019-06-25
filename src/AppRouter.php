@@ -12,7 +12,7 @@ $app->get('/', function ($request, $response, $args) {
 $app->get('/settings', Solodev\App\Settings::class)
     ->setName('Settings');
 
-$app->get('/dashboard', Solodev\App\Dashboard::class)
+$app->get('/dashboard', \App\Dashboard::class)
     ->setName('dashboard');
 
 $app->get('/404', Solodev\App\PageNotFound::class)

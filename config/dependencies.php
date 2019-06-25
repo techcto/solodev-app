@@ -1,9 +1,9 @@
 <?php
 
 // Boot Portal Core
-include_once(dirname(__FILE__) . '/../../modules/portal/includes/Portal_Core.inc');
-$container['portal'] = new Portal_Core();
-$container['userManager'] = new User_Manager();
+//include_once(dirname(__FILE__) . '/../../modules/portal/includes/Portal_Core.inc');
+//$container['portal'] = new Portal_Core();
+//$container['userManager'] = new User_Manager();
 
 // Register Flash Messages
 $container['flash'] = function ($container) {
@@ -35,7 +35,7 @@ $container['csrf'] = function ($container) {
       $body->write('CSRF values are not vaild. Please try again...');
       return $response->withStatus(400)->withHeader('Content-type', 'text/plain')->withBody($body);
   });
-  return $guard;
+ // return $guard;
 };
 
 // Register Logger
@@ -59,25 +59,10 @@ $container['view'] = function ($container) {
   $view->addExtension(new Slim\Views\TwigExtension($router, $uri));
 
   //CSRF
-  $view->addExtension(new App\Twig\CsrfExtension($container->get('csrf')));
-
-  //App
-  $view->addExtension(new App\Twig\AppsExtension($container->get('apps')));
-
-  //Route
-  $view->addExtension(new App\Twig\RouteExtension($container));
-
-  //Table
-  $view->addExtension(new App\Twig\TableExtension());
+  //$view->addExtension(new App\Twig\CsrfExtension($container->get('csrf')));
 
   //Helpers
   $view->addExtension(new App\Twig\HelpersExtension());
-
-  //Tab
-  $view->addExtension(new App\Twig\TabExtension());
-
-  //Breadcrumb
-  $view->addExtension(new App\Twig\BreadcrumbExtension($container));
 
   //Modal
   $view->addExtension(new App\Twig\ModalExtension());
@@ -99,7 +84,7 @@ $container['view'] = function ($container) {
   //$view->addExtension(new Twig_Extension_Debug());
 
   //Add Flash Messages into View
-  $view->getEnvironment()->addGlobal('flash', $container->flash);
+  //$view->getEnvironment()->addGlobal('flash', $container->flash);
   $routeParts = explode("/",$container->get('request')->getUri()->getPath());
   $view->getEnvironment()->addGlobal('currentView', $routeParts[1]);
   
