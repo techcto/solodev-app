@@ -25,7 +25,7 @@ $container["JwtAuthentication"] = function ($container) {
 };
 
 $app->add("JwtAuthentication");
-$app->add(new Solodev\Middleware\SSLVerification($container));
+$app->add(new App\Middleware\SSLVerification($container));
 
 //App Protection
 $app->add($container->csrf);

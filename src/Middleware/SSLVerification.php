@@ -30,7 +30,7 @@ class SSLVerification
             }
         }
 
-        if (!$settings['isSSL'] && $settings['solodev']['ssl_active'] && !strpos($_SERVER['REQUEST_URI'], 'healthcheck')) {
+        if (!$settings['isSSL'] && $settings['app']['ssl_active'] && !strpos($_SERVER['REQUEST_URI'], 'healthcheck')) {
             //SSL_VERIFIED is on, they need to be redirected to use HTTPS using old school PHP
             
             $redirect_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];

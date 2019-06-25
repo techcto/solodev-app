@@ -59,28 +59,28 @@ $container['view'] = function ($container) {
   $view->addExtension(new Slim\Views\TwigExtension($router, $uri));
 
   //CSRF
-  $view->addExtension(new Solodev\Twig\CsrfExtension($container->get('csrf')));
+  $view->addExtension(new App\Twig\CsrfExtension($container->get('csrf')));
 
   //App
-  $view->addExtension(new Solodev\Twig\AppsExtension($container->get('apps')));
+  $view->addExtension(new App\Twig\AppsExtension($container->get('apps')));
 
   //Route
-  $view->addExtension(new Solodev\Twig\RouteExtension($container));
+  $view->addExtension(new App\Twig\RouteExtension($container));
 
   //Table
-  $view->addExtension(new Solodev\Twig\TableExtension());
+  $view->addExtension(new App\Twig\TableExtension());
 
   //Helpers
-  $view->addExtension(new Solodev\Twig\HelpersExtension());
+  $view->addExtension(new App\Twig\HelpersExtension());
 
   //Tab
-  $view->addExtension(new Solodev\Twig\TabExtension());
+  $view->addExtension(new App\Twig\TabExtension());
 
   //Breadcrumb
-  $view->addExtension(new Solodev\Twig\BreadcrumbExtension($container));
+  $view->addExtension(new App\Twig\BreadcrumbExtension($container));
 
   //Modal
-  $view->addExtension(new Solodev\Twig\ModalExtension());
+  $view->addExtension(new App\Twig\ModalExtension());
 
   $filter = new Twig_SimpleFilter('cast_to_array', function ($stdClassObject) {
     $response = (array)$stdClassObject;
@@ -107,9 +107,9 @@ $container['view'] = function ($container) {
 };
 
 ///// App /////
-$container[Solodev\App\Healthcheck::class] = function ($c) {
-  return new Solodev\App\Healthcheck($c->get('view'), $c->get('logger'),$c);
+$container[App\Healthcheck::class] = function ($c) {
+  return new App\Healthcheck($c->get('view'), $c->get('logger'),$c);
 };
-$container[Solodev\App\Dashboard::class] = function ($c) {
-  return new Solodev\App\Dashboard($c->get('view'), $c->get('logger'),$c);
+$container[App\Dashboard::class] = function ($c) {
+  return new App\Dashboard($c->get('view'), $c->get('logger'),$c);
 };
