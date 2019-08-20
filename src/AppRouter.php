@@ -9,5 +9,5 @@ $app->get('/', function ($request, $response, $args) {
     return $response->withRedirect('/dashboard'); 
 });
 
-$app->get('/dashboard', \App\Dashboard::class)
+$app->get('/dashboard', \App\App\Dashboard::class)
     ->setName('dashboard');

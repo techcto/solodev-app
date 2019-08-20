@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\App;
 
 use Slim\Views\Twig;
 use Psr\Log\LoggerInterface;

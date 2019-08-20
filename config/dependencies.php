@@ -92,9 +92,9 @@ $container['view'] = function ($container) {
 };
 
 ///// App /////
-$container[App\Healthcheck::class] = function ($c) {
-  return new App\Healthcheck($c->get('view'), $c->get('logger'),$c);
+$container[App\App\Healthcheck::class] = function ($c) {
+  return new App\App\Healthcheck($c->get('view'), $c->get('logger'),$c);
 };
-$container[App\Dashboard::class] = function ($c) {
-  return new App\Dashboard($c->get('view'), $c->get('logger'),$c);
+$container[App\App\Dashboard::class] = function ($c) {
+  return new App\App\Dashboard($c->get('view'), $c->get('logger'),$c);
 };
