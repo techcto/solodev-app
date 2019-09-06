@@ -17,7 +17,7 @@ phases:
       - ls -al
       - yum install -y zip git
       - composer install --optimize-autoloader --no-dev
-      - zip -r hello_world.zip config src ui www test vendor composer.json composer.lock .env
-      - echo '{"App_View":[{"name":"Hello World", "nav_icon":"fas fa-robot", "entrypoint":"/www/app.php" "from_path":"/hello_world.zip", "parent_id":"<!app_section!>", "app_name":"hello_world" }]}' > config.json
-      - zip -r hello_world_app.zip hello_world.zip config.json
-      - aws s3 cp hello_world_app.zip s3://solodev-marketplace/apps/     
+      - zip -r hello-world.zip config src ui www test vendor composer.json composer.lock .env
+      - echo '{"App_View":[{"name":"Hello World", "nav_icon":"fas fa-robot", "entrypoint":"/www/app.php" "from_path":"/hello-world.zip", "parent_id":"<!app_section!>", "app_name":"hello-world" }]}' > config.json
+      - zip -r app.zip hello-world.zip config.json
+      - aws s3 cp app.zip s3://solodev-marketplace/apps/hello-world/     
