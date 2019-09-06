@@ -10,11 +10,17 @@ $container['flash'] = function ($container) {
   return new \Slim\Flash\Messages;
 };
 
+$container['environment'] = function () {
+  $urlParts = explode("/",$_SERVER['REQUEST_URI']);
+  $_SERVER['SCRIPT_NAME'] = '/apps/' . $urlParts[2] . "/view";
+  return new Slim\Http\Environment($_SERVER);
+};
+
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         return $response->withStatus(404)
             ->withHeader('Content-Type', 'text/html')
-            ->write('Page not found moo');
+            ->write('Page not found');
     };
 };
 
