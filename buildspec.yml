@@ -20,3 +20,4 @@ phases:
       - zip --symlinks -r hello_world.zip config src ui www test vendor composer.json composer.lock .env
       - echo '{"App_View":[{"name":"Hello World", "nav_icon":"fas fa-robot", "entrypoint":"/www/app.php" "from_path":"/hello_world.zip", "parent_id":"<!app_section!>", "app_name":"hello_world" }]}' > config.json
       - zip -r hello_world.zip hello_world.zip config.json
+      - aws s3 cp hello_world.zip s3://solodev-marketplace     
