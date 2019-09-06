@@ -1,0 +1,23 @@
+---
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - curl -qL -o jq https://stedolan.github.io/jq/download/linux64/jq && chmod +x ./jq
+      - curl -O https://bootstrap.pypa.io/get-pip.py
+      - python get-pip.py
+      - pip install awscli
+      - aws --version
+      - curl -qL -o aws_credentials.json http://169.254.170.2/$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI > aws_credentials.json
+      - aws configure set region $AWS_REGION
+      - aws configure set aws_access_key_id `./jq -r '.AccessKeyId' aws_credentials.json`
+      - aws configure set aws_secret_access_key `./jq -r '.SecretAccessKey' aws_credentials.json`
+      - aws configure set aws_session_token `./jq -r '.Token' aws_credentials.json`
+      - ls -al
+      - yum install -y zip git
+      - composer install
+      - zip --symlinks -r hello_world.zip config src ui www test vendor composer.json composer.lock .env
+      - echo '{"App_View":[{"name": "Personalize", "nav_icon": "fas fa-robot", "entrypoint": "/www/app.php" "from_path": "/hello_world.zip", "parent_id": "<!app_section!>", "app_name": "personalize" }]}' > config.json
+      - zip -r hello_world.zip hello_world.zip config.json
+      - aws s3 cp hello_world.zip s3://solodev-aws-ha
