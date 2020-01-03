@@ -8,10 +8,10 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
     <title>{{ organization }}</title>
     <!-- Theme CSS -->
-    <link href="/__/app.min.css" rel="stylesheet">
+    <link href="{{ base_url() }}/__/app.min.css" rel="stylesheet">
 
     <!-- Theme JS -->
-    <script src="/__/app.min.js"></script>
+    <script src="{{ base_url() }}/__/app.min.js"></script>
     <script>var timestamp = '{{ timestamp }}';</script>
     <script>var nonce = '{{ nonce }}';</script>
     <script>
