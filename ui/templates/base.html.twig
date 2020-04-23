@@ -9,21 +9,6 @@
     <title>{{ organization }}</title>
     <!-- Theme CSS -->
     <link href="{{ base_url() }}/__/app.min.css" rel="stylesheet">
-
-    <!-- Theme JS -->
-    <script src="{{ base_url() }}/__/app.min.js"></script>
-    <script>var timestamp = '{{ timestamp }}';</script>
-    <script>var nonce = '{{ nonce }}';</script>
-    <script>
-      //refresh token
-      $.ajax({url: "/api.php/refresh", success: function(result){ }});
-
-    {% if isFilemanager %}
-      window.onfocus=top.setFrameTrue;
-      window.onblur=top.setFrameFalse;
-    {% endif %}
-    </script>
-
   </head>
   <body class="{% block theme %}theme{% endblock %}">
     {% block layout %}{% endblock %}

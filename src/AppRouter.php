@@ -1,8 +1,8 @@
 <?php
 
 // Public Routes
-$app->get('/healthcheck', Solodev\App\Healthcheck::class)
+$app->get('/healthcheck', App\App\Healthcheck::class)
     ->setName('healthcheck');
 
-$app->get('/', \App\App\Dashboard::class)
+$app->get('/', App\App\Dashboard::class)
     ->setName('dashboard');

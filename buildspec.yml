@@ -19,9 +19,14 @@ phases:
       - composer install --optimize-autoloader --no-dev
       - cd www
       - npm install
-      - npm run compile
+      - npm run css
+      - rm -Rf node_modules
+      - rm -f package-lock.json
+      - rm -f package.json
+      - rm -f webpack.config.js
+      - rm -Rf __/scss
       - cd ../
-      - zip -r hello-world.zip config src ui www test vendor composer.json composer.lock .env
+      - zip -r hello-world.zip config src ui www vendor composer.json composer.lock .env
       - echo '{"App_View":[{"name":"<!app_name!>", "nav_icon":"fas fa-flag", "entrypoint":"/www/app.php", "from_path":"/hello-world.zip", "parent_id":"<!app_section!>", "app_name":"hello-world" }]}' > config.json
       - zip -r app.zip hello-world.zip config.json
       - aws s3 cp app.zip s3://solodev-marketplace/apps/hello-world/     
