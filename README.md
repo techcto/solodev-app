@@ -4,12 +4,12 @@ In order to import this application into Solodev it must go through the package 
 ```
 /package.zip
 	/THIS REPOSITORY/	
-	/app.zip
+	/app.zip   --> must be zipped contents of your repository, not the folder
 	/config.json
 ```
         
 ## config.json
-The config.json file must contain the following markup. The package variables ("<!app_name!>" and "<!app_section!>") will be overwritten by the user upon installation.
+The config.json file must contain the following markup. DO NOT CHANGE system package variables ("<!app_name!>" and "<!app_section!>") as they will be overwritten automatically upon installation.
 
 ```
 {
@@ -17,7 +17,8 @@ The config.json file must contain the following markup. The package variables ("
 		"name": "<!app_name!>",
 		"nav_icon": "fas fa-flag",
 		"from_path": "/app.zip",
-		"parent_id": "<!app_section!>"
+		"parent_id": "<!app_section!>",
+		"entrypoint" : "/www/app.php"
   }]
 }
 ```
