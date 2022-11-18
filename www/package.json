@@ -44,7 +44,7 @@
     "uglify-js": "^3.4.7",
     "url-loader": "^1.1.2",
     "webpack": "^4.28.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
     "css": "npm-run-all css-compile css-prefix css-minify",
